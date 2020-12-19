@@ -1,0 +1,37 @@
+public class AccountSearchController {
+    public String accName {get; set;}
+    public Account accRes {get; set;}
+    public String resultMessage {get; set;}
+    public Boolean flag { get; set; }
+    
+    public void handleSearch() {
+        try{
+            Account acc = [
+                SELECT Name, IsSearched__c
+                FROM Account
+                WHERE Name
+                LIKE :accName+'%'
+            ];
+            
+            acc.IsSearched__c = true;
+            
+            update acc;
+            
+            accRes = [
+                SELECT Name, IsSearched__c
+                FROM Account
+                WHERE Name
+                LIKE :accName + '%'
+            ];
+            
+            accName = '';
+            
+            resultMessage = 'Account ' + accRes.Name + ' updated successfully!';
+            flag = true;
+        } catch(Exception e) {
+            resultMessage = e.getMessage();
+            System.debug(e.getMessage());
+        }
+        
+    }
+}
