@@ -1,0 +1,11 @@
+<apex:component controller="AccountSearchController" allowDML="true" >
+    
+    <apex:pageBlock title="Account Search">
+        <apex:form >
+            <apex:inputText value="{!accName}" label="Search Name" />
+            <apex:commandButton value="Search" action="{!handleSearch}" />
+            <apex:outputText value="{!resultMessage}" rendered="{!flag}" />
+        </apex:form>
+    </apex:pageBlock>
+    
+</apex:component>
